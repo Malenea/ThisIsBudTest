@@ -33,6 +33,9 @@ response.
 Empty placeholder request for remove has been implemented too, though it does nothing more than print
 at the moment, since the endpoint is not dynamic.
 
+The core test was done in ~2 hours, implementation of styles protocols were not developed during this test
+time frame, they were developed by me to serve as a basis for my personal projects out of this test's scope.
+
 Once a request has finished, it notifies the view controller holding the transaction table view, providing
 the new data, the table view can then update to reflect the changes.
 
@@ -51,10 +54,15 @@ This might look like a lot of code, but it allows to uniformize the UI definitio
 numbers and inconsistencies, also, it wouldn't grow consistently the more view controllers / components
 we add.
 
-These protocols, definitions and classes were not created during this test's time limit, but were patterns
-I usually keep on the side for tests, as a basis. They're not full either as usually test don't require to
+These protocols, definitions and classes were not created during this test's time scope, but were patterns
+I usually keep on the side for personal projects, as a basis. They're not full either as usually test don't require to
 cover it all, so I integrate only the needed patterns.
 
+### Testing:
+
+Very basic unit testing and UI testing were implemented just to showcase that I do know what they are and
+how they work, also, coverage is not ideal but again, the idea was to try to do the test in the time specified
+during the interview, which is roughly ~2hrs.
 
 ### Known issues:
 
