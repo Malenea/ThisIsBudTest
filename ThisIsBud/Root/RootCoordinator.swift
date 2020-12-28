@@ -14,7 +14,7 @@ final class RootCoordinator: Coordinator {
 
     // MARK: - Coordinators and navigation controller
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    var navigationController: NavigationController
 
     // MARK: - Items
     public let onTransactionsUpdated = TriggeredEvent<[Transaction]>()
@@ -37,7 +37,7 @@ final class RootCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: NavigationController) {
         self.navigationController = navigationController
     }
 

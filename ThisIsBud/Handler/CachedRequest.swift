@@ -21,11 +21,10 @@ class CachedRequest {
             return nil
         } else {
             let config = URLSessionConfiguration.default
-
             config.urlCache = cache
 
             let session = URLSession(configuration: config)
-            let task = session.dataTask(with: request) { data, response, error in
+            let task: URLSessionDataTask = session.dataTask(with: request) { data, response, error in
                 if let response = response, let data = data {
                     let cacheResponse = CachedURLResponse(response: response, data: data)
                     URLCache.shared.storeCachedResponse(cacheResponse, for: request)

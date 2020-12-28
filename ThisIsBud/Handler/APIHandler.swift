@@ -32,16 +32,40 @@ struct APIResponse {
     var error: Error?
 }
 
+// MARK: - URL session protocol
+protocol URLSessionDataTaskProtocol { func resume() }
+protocol URLSessionProtocol { typealias DataTaskResult = (Foundation.Data?, URLResponse?, Error?) -> Void
+
+    func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol
+
+}
+
+extension URLSessionDataTask: URLSessionDataTaskProtocol {}
+extension URLSession: URLSessionProtocol {
+
+    func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {
+        let task: URLSessionDataTask = dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTask
+        return task
+    }
+
+}
+
 // MARK: - API handler
 class APIHandler {
 
     // MARK: - Singleton
-    static let shared = APIHandler()
+    static let shared = APIHandler(session: URLSession.shared)
+
+    private let session: URLSessionProtocol
+    init(session: URLSessionProtocol) {
+        self.session = session
+    }
 
     func get(endpoint: Endpoint, completion: ((APIResponse) -> Void)? = nil) {
         guard let url = URL(string: endpoint.urlString) else { return }
-        let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        session.dataTask(with: request as URLRequest) { data, response, error in
             completion?(APIResponse(data: data, response: response, error: error))
         }.resume()
     }

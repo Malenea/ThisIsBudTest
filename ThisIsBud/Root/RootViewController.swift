@@ -64,6 +64,10 @@ class RootViewController: ViewController {
         view.backgroundColor = cachedStyle.color.common.background
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+
 }
 
 // MARK: - UI setup

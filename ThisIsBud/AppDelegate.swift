@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // MARK: - Initiate Root
-        let navController = UINavigationController()
+        let navController = NavigationController()
         coordinator = RootCoordinator(navigationController: navController)
         coordinator?.start()
 
